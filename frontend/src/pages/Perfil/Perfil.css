@@ -1,0 +1,155 @@
+.perfil-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 460px;
+}
+
+.profile-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #38bdf8, #a78bfa);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #0f172a;
+  flex-shrink: 0;
+}
+
+.profile-role {
+  margin: 0.25rem 0 0;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+}
+
+.profile-meta {
+  margin: 0.35rem 0 0;
+  color: #cbd5e1;
+  font-size: 0.9rem;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 1rem;
+}
+
+.profile-form,
+.profile-stats,
+.profile-activity {
+  border-radius: 18px;
+  padding: 1rem 1.1rem;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.section-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.section-title h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.section-title span {
+  color: #9fb2cd;
+  font-size: 0.82rem;
+}
+
+.profile-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  color: #e2e8f0;
+  font-size: 0.9rem;
+}
+
+.profile-form input,
+.profile-form textarea {
+  width: 100%;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  padding: 0.7rem 0.8rem;
+  background: rgba(255,255,255,0.06);
+  color: white;
+}
+
+.profile-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary,
+.btn-secondary {
+  border: none;
+  border-radius: 999px;
+  padding: 0.7rem 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #38bdf8, #6366f1);
+  color: white;
+}
+
+.btn-secondary {
+  background: rgba(255,255,255,0.12);
+  color: #f8fafc;
+}
+
+.profile-message {
+  margin: 0;
+  color: #7dd3fc;
+  font-size: 0.9rem;
+}
+
+.profile-side-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.stat-pill {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 0.5rem 0.7rem;
+  border-radius: 999px;
+  margin-bottom: 0.55rem;
+  background: rgba(56,189,248,0.16);
+  color: #7dd3fc;
+  font-size: 0.86rem;
+}
+
+.profile-activity ul {
+  margin: 0;
+  padding-left: 1rem;
+  color: #cbd5e1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+@media (max-width: 900px) {
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+}

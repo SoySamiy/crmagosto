@@ -1,0 +1,127 @@
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.page-header h1 {
+  margin: 0;
+}
+
+.filter-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.filter-tabs.secondary {
+  margin-top: -0.25rem;
+}
+
+.filter-tab {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.75);
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.filter-tabs.secondary .filter-tab {
+  font-size: 0.78rem;
+  padding: 0.35rem 0.75rem;
+}
+
+.filter-tab:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.filter-tab.active {
+  background: #38bdf8;
+  border-color: #38bdf8;
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table-scroll .data-table th,
+.table-scroll .data-table td {
+  white-space: nowrap;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge-persona-fisica {
+  background: rgba(167, 139, 250, 0.2);
+  color: #c4b5fd;
+}
+
+.badge-persona-moral {
+  background: rgba(56, 189, 248, 0.2);
+  color: #7dd3fc;
+}
+
+.badge-tipo-prospecto {
+  background: rgba(251, 191, 36, 0.2);
+  color: #fcd34d;
+}
+
+.badge-tipo-cliente {
+  background: rgba(56, 189, 248, 0.2);
+  color: #7dd3fc;
+}
+
+.badge-tipo-cliente_frecuente {
+  background: rgba(52, 211, 153, 0.2);
+  color: #6ee7b7;
+}
+
+.badge-tipo-ex_cliente {
+  background: rgba(248, 113, 113, 0.2);
+  color: #fca5a5;
+}
+
+.badge-etapa-contacto_inicial,
+.badge-etapa-onboarding {
+  background: rgba(148, 163, 184, 0.2);
+  color: #cbd5e1;
+}
+
+.badge-etapa-cotizacion,
+.badge-etapa-retencion {
+  background: rgba(251, 191, 36, 0.2);
+  color: #fcd34d;
+}
+
+.badge-etapa-negociacion {
+  background: rgba(56, 189, 248, 0.2);
+  color: #7dd3fc;
+}
+
+.badge-etapa-fidelizado {
+  background: rgba(52, 211, 153, 0.2);
+  color: #6ee7b7;
+}
+
+.badge-etapa-inactivo {
+  background: rgba(148, 163, 184, 0.15);
+  color: #94a3b8;
+}

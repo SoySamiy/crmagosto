@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "nombre": "Laura Gómez",
+    "email": "laura.gomez@crm.com",
+    "telefono": "555-0191",
+    "puesto": "Senior Account Manager",
+    "departamento": "Ventas",
+    "empresa": "CRM Solutions",
+    "direccion": "Av. Reforma 123, CDMX",
+    "estado": "activo",
+    "origen": "Recomendación",
+    "prioridad": "alta",
+    "notas": "Cliente clave y referente comercial.",
+    "creadoEl": "2025-01-15T09:00:00.000Z",
+    "ultimoContacto": "2026-07-15T10:30:00.000Z"
+  },
+  {
+    "id": 2,
+    "nombre": "Carlos Rluiz",
+    "email": "carlos.ruiz@crm.com",
+    "telefono": "555-0192",
+    "puesto": "Customer Successs Specialist",
+    "departamento": "Soporte",
+    "empresa": "CRM Solutions",
+    "direccion": "Calle de los Álamos 45, Guadalajara",
+    "estado": "activo",
+    "origen": "Recomendación",
+    "prioridad": "media",
+    "notas": "Responsable de onboarding y seguimiento.",
+    "creadoEl": "2025-02-20T10:30:00.000Z",
+    "ultimoContacto": "2026-07-20T12:00:00.000Z"
+  }
+]
