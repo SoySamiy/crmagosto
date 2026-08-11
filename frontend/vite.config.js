@@ -3,7 +3,8 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: "/crmagosto/",
+  // Use relative base so assets load correctly regardless of Pages config
+  base: "./",
   plugins: [react()],
   server: {
     port: 5173,
