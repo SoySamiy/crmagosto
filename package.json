@@ -1,17 +1,17 @@
 {
   "name": "crm2.0",
+  "homepage": "https://ivcc8.github.io/crmagosto",
   "version": "1.0.0",
   "description": "CRM 2.0 - frontend (React + Vite) y backend (Express)",
   "private": true,
-  "homepage": "https://ivcc8.github.io/crmagosto/",
-  "scripts": {
+    "scripts": {
     "install:all": "npm install --prefix frontend && npm install --prefix backend",
     "dev:frontend": "npm run dev --prefix frontend",
     "dev:backend": "npm run dev --prefix backend",
     "dev": "concurrently -n FRONTEND,BACKEND -c blue,green \"npm:dev:frontend\" \"npm:dev:backend\"",
     "build:frontend": "npm run build --prefix frontend",
-    "predeploy": "npm run build --prefix frontend",
-    "deploy": "gh-pages -d frontend/dist"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "license": "ISC",
   "devDependencies": {
