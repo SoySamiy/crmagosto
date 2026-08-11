@@ -24,6 +24,9 @@ jobs:
         working-directory: frontend
         run: npm run build
 
+      - name: Create 404.html from index.html
+        run: cp frontend/dist/index.html frontend/dist/404.html
+
       - name: Ensure .nojekyll exists
         run: echo "" > frontend/dist/.nojekyll
 
