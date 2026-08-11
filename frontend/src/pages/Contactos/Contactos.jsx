@@ -1,6 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
+import { useParams } from "react-router-dom";
 import { crearContacto, actualizarContacto, eliminarContacto, getContactos } from "../../services/contactosService";
 import "./Contactos.css";
+
+const PERSONA_FILTROS = {
+  fisicas: { valor: "fisica", titulo: "Personas fisicas" },
+  morales: { valor: "moral", titulo: "Personas morales" },
+};
 
 const DATA_REFRESH_EVENT = "crm-data-refresh";
 const DATA_REFRESH_STORAGE_KEY = "crm-data-refresh";
@@ -16,6 +22,7 @@ const EMPTY_FORM = {
   estado: "activo",
   origen: "Recomendación",
   prioridad: "media",
+  tipoPersona: "fisica",
   notas: "",
   ultimoContacto: "",
 };
@@ -45,6 +52,7 @@ function notifyDataRefresh() {
 }
 
 export default function Contactos() {
+  const { personaTipo } = useParams();
   const [contactos, setContactos] = useState([]);
   const [error, setError] = useState(null);
   const [modalReunion, setModalReunion] = useState(null);
@@ -59,6 +67,16 @@ export default function Contactos() {
       .then((res) => setContactos(res.data || []))
       .catch((err) => setError(err.message));
   }
+
+  const personaSeleccionada = PERSONA_FILTROS[personaTipo]?.valor;
+  const contactosFiltrados = useMemo(() => {
+    return contactos.filter((contacto) => {
+      if (!personaSeleccionada) return true;
+      return contacto.tipoPersona === personaSeleccionada;
+    });
+  }, [contactos, personaSeleccionada]);
+
+  const titulo = PERSONA_FILTROS[personaTipo]?.titulo ? `Contactos - ${PERSONA_FILTROS[personaTipo].titulo}` : "Contactos";
 
   useEffect(() => {
     loadContactos();
@@ -122,6 +140,7 @@ export default function Contactos() {
       estado: form.estado || "activo",
       origen: form.origen || "Recomendación",
       prioridad: form.prioridad || "media",
+      tipoPersona: form.tipoPersona || "fisica",
       notas: form.notas.trim(),
       creadoEl: editingContact?.creadoEl || ahora,
       ultimoContacto: form.ultimoContacto ? new Date(form.ultimoContacto).toISOString() : ahora,
@@ -158,7 +177,7 @@ export default function Contactos() {
     <div className="crm-main-container">
       <header className="crm-header">
         <div className="title-section">
-          <h1>Contactos</h1>
+          <h1>{titulo}</h1>
           <p>Gestión de clientes, prospectos y equipo comercial</p>
         </div>
         <button className="btn-primary header-action" onClick={openCreateModal}>
@@ -185,7 +204,7 @@ export default function Contactos() {
       </div>
 
       <div className="cards-grid">
-        {contactos.map((c) => {
+        {contactosFiltrados.map((c) => {
           const tieneDireccion = c.direccion && c.direccion !== "null";
           const estado = c.estado || "activo";
           const prioridad = c.prioridad || "media";
@@ -199,6 +218,9 @@ export default function Contactos() {
                   <div className="badge-row">
                     <span className={`type-tag ${estado}`}>{estado}</span>
                     <span className={`type-tag secondary ${prioridad}`}>{prioridad}</span>
+                    {c.tipoPersona && (
+                      <span className={`type-tag persona-${c.tipoPersona}`}>{c.tipoPersona === "moral" ? "Persona moral" : "Persona fisica"}</span>
+                    )}
                     <button className="meeting-tag interactive-btn" onClick={() => setModalReunion(c)}>
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                       Reuniones
@@ -322,6 +344,13 @@ export default function Contactos() {
                 <label>
                   Puesto
                   <input value={form.puesto} onChange={(event) => updateField("puesto", event.target.value)} />
+                </label>
+                <label>
+                  Tipo de persona
+                  <select value={form.tipoPersona} onChange={(event) => updateField("tipoPersona", event.target.value)}>
+                    <option value="fisica">Persona física</option>
+                    <option value="moral">Persona moral</option>
+                  </select>
                 </label>
                 <label>
                   Departamento

@@ -1,0 +1,33 @@
+[
+  {
+    "id": 1,
+    "nombre": "Plataforma CRM Premium",
+    "categoria": "Software",
+    "precio": 185000,
+    "inventario": 24,
+    "unidad": "licencias",
+    "descripcion": "Sistema de gestión comercial con seguimiento de ventas y automatización.",
+    "creadoEl": "2025-10-10T09:00:00.000Z",
+    "estado": "agotado"
+  },
+  {
+    "id": 2,
+    "nombre": "Paquete de soporte técnico",
+    "categoria": "Servicios",
+    "precio": 32000,
+    "inventario": 100,
+    "unidad": "paquetes",
+    "descripcion": "Soporte mensual con atención prioritaria y monitoreo 24/7.",
+    "creadoEl": "2025-11-08T10:30:00.000Z"
+  },
+  {
+    "id": 3,
+    "nombre": "Integración API personalizada",
+    "categoria": "Servicio profesional",
+    "precio": 78000,
+    "inventario": 16,
+    "unidad": "proyectos",
+    "descripcion": "Desarrollo de conexión entre el CRM y sistemas internos de clientes.",
+    "creadoEl": "2026-02-12T14:20:00.000Z"
+  }
+]

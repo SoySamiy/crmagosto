@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "productoId": 1,
+    "clienteNombre": "Gómez Industrial S.A. de C.V.",
+    "cantidad": 2,
+    "total": 370000,
+    "estado": "cancelado",
+    "fechaPedido": "2026-06-15T10:00:00.000Z",
+    "direccionEnvio": "Av. Industria 120, Guadalajara",
+    "notas": "Entrega prioritaria a bodega central."
+  },
+  {
+    "id": 2,
+    "productoId": 2,
+    "clienteNombre": "TechNexus México",
+    "cantidad": 1,
+    "total": 32000,
+    "estado": "completado",
+    "fechaPedido": "2026-05-22T09:30:00.000Z",
+    "direccionEnvio": "Blvd. Tecnológico 34, CDMX",
+    "notas": "Soporte mensual para equipo de ventas."
+  },
+  {
+    "id": 3,
+    "productoId": 3,
+    "clienteNombre": "Distribuciones del Valle S.A.",
+    "cantidad": 1,
+    "total": 78000,
+    "estado": "pendiente",
+    "fechaPedido": "2026-06-28T16:10:00.000Z",
+    "direccionEnvio": "Camino Real 220, Estado de México",
+    "notas": "Cotizacion aceptada, pendiente confirmacion de pago."
+  },
+  {
+    "id": 4,
+    "productoId": 4,
+    "clienteNombre": "Consultoría Verde S.A. de C.V.",
+    "cantidad": 3,
+    "total": 66000,
+    "estado": "completado",
+    "fechaPedido": "2026-04-15T12:45:00.000Z",
+    "direccionEnvio": "Av. Reforma 180, CDMX",
+    "notas": "Curso programado para julio."
+  }
+]

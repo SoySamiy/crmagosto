@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "nombre": "Admin CRM",
+    "email": "admin@crm.com",
+    "roles": [
+      "admin",
+      "manager"
+    ],
+    "estado": "inactivo",
+    "cargo": "Administrador general",
+    "creadoEl": "2025-09-01T08:30:00.000Z",
+    "ultimaConexion": "2026-08-11T04:13:32.835Z",
+    "notas": "Usuario de administración con acceso completo."
+  },
+  {
+    "id": 2,
+    "nombre": "Laura Gomez",
+    "email": "laura.gomez@crm.com",
+    "roles": [
+      "ventas"
+    ],
+    "estado": "activo",
+    "cargo": "Ejecutiva de cuenta",
+    "creadoEl": "2026-01-20T10:20:00.000Z",
+    "ultimaConexion": "2026-08-05T14:12:00.000Z",
+    "notas": "Responsable de clientes clave y oportunidades corporativas."
+  }
+]

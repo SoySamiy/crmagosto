@@ -1,0 +1,360 @@
+.section-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1240px;
+  width: min(100%, 1240px);
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.section-header h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.section-header p {
+  margin: 10px 0 0;
+  color: #cbd5e1;
+  max-width: 680px;
+}
+
+.section-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.section-toolbar input,
+.section-toolbar select {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.08);
+  color: #f8fafc;
+}
+
+.field-group.compact {
+  flex: 1 1 180px;
+  min-width: 160px;
+  max-width: 260px;
+}
+
+.toolbar-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.section-pill {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: #e2e8f0;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.section-pill.active {
+  background: rgba(56, 189, 248, 0.18);
+  border-color: rgba(56, 189, 248, 0.28);
+  color: #f8fafc;
+}
+
+.table-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  color: #cbd5e1;
+  font-size: 0.95rem;
+}
+
+.table-action {
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: #f8fafc;
+  padding: 8px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  margin-left: auto;
+}
+
+.table-action:hover {
+  transform: translateY(-1px);
+  background: rgba(56, 189, 248, 0.18);
+}
+
+.table-action:hover {
+  transform: translateY(-1px);
+  background: rgba(56, 189, 248, 0.18);
+}
+
+.table-action.danger {
+  background: rgba(248, 113, 113, 0.16);
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-card {
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 960px);
+  max-width: 960px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: rgba(15, 23, 42, 0.96);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  max-height: calc(100vh - 48px);
+}
+
+.modal-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.modal-card-header h2 {
+  margin: 0 0 6px;
+}
+
+.modal-card-header p {
+  margin: 0;
+  color: #cbd5e1;
+}
+
+.close-btn {
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: #f8fafc;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.modal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(240px, 1fr));
+  gap: 18px;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: #cbd5e1;
+}
+
+.field-group input,
+.field-group select,
+.field-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: #f8fafc;
+}
+
+.field-group textarea {
+  resize: vertical;
+}
+
+.modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 18px 24px 24px;
+  background: rgba(255, 255, 255, 0.03);
+  margin-top: auto;
+}
+
+.section-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+}
+
+.summary-card {
+  border-radius: 18px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.section-chart-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.chart-panel {
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 20px;
+}
+
+@media (min-width: 960px) {
+  .section-chart-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.chart-panel h2 {
+  margin: 0 0 14px;
+  font-size: 1.3rem;
+  color: #f8fafc;
+}
+
+.chart-panel p {
+  color: #cbd5e1;
+}
+
+@media (min-width: 900px) {
+  .section-chart-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.summary-card span {
+  color: #94a3b8;
+  font-size: 0.82rem;
+}
+
+.summary-card strong {
+  font-size: 1.55rem;
+  color: #f8fafc;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.section-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+}
+
+.section-table th,
+.section-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e2e8f0;
+  text-align: left;
+}
+
+.section-table th {
+  background: rgba(255, 255, 255, 0.08);
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.section-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.error {
+  color: #fecaca;
+  font-weight: 600;
+}
+
+@media (max-width: 1120px) {
+  .modal-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1024px) {
+  .section-table {
+    min-width: 100%;
+  }
+
+  .section-page {
+    padding: 0 14px;
+  }
+}
+
+@media (max-width: 860px) {
+  .section-header,
+  .section-toolbar,
+  .modal-card-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .section-toolbar {
+    justify-content: stretch;
+  }
+
+  .section-toolbar input {
+    width: 100%;
+  }
+
+  .table-actions {
+    justify-content: flex-start;
+  }
+
+  .section-table th,
+  .section-table td {
+    padding: 10px 8px;
+  }
+}
+
+@media (max-width: 680px) {
+  .section-page {
+    padding: 0 10px;
+  }
+
+  .section-table {
+    min-width: 620px;
+  }
+
+  .modal-card {
+    max-width: 100%;
+    margin: 0 8px;
+  }
+}

@@ -1,0 +1,48 @@
+[
+  {
+    "id": 1,
+    "referencia": "COT-2026-001",
+    "cliente": "Empresa Soluciones SA",
+    "monto": 85000,
+    "estado": "aprobada",
+    "responsable": "Laura Gomez",
+    "fechaCreacion": "2026-07-28",
+    "fechaValidez": "2026-08-15",
+    "items": [
+      {
+        "nombre": "Implementación CRM",
+        "cantidad": 1,
+        "precioUnitario": 65000
+      },
+      {
+        "nombre": "Soporte mensual",
+        "cantidad": 3,
+        "precioUnitario": 6667
+      }
+    ],
+    "notas": "Cotización para paquete de software y consultoría."
+  },
+  {
+    "id": 2,
+    "referencia": "COT-2026-002",
+    "cliente": "Servicios Integrales MX",
+    "monto": 45000,
+    "estado": "rechazada",
+    "responsable": "Carlos Ruiz",
+    "fechaCreacion": "2026-07-21",
+    "fechaValidez": "2026-08-05",
+    "items": [
+      {
+        "nombre": "Integración API",
+        "cantidad": 1,
+        "precioUnitario": 30000
+      },
+      {
+        "nombre": "Capacitación",
+        "cantidad": 2,
+        "precioUnitario": 7500
+      }
+    ],
+    "notas": "Cotización aprobada para proyecto de integración de datos."
+  }
+]

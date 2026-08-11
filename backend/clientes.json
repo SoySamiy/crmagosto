@@ -16,18 +16,23 @@
   },
   {
     "id": 2,
-    "nombre": "Juan Perez",
+    "nombre": "Juan Perezz",
     "email": "juan.perez@correo.com",
     "telefono": "555-0102",
     "tipoPersona": "fisica",
     "tipo": "prospecto",
-    "etapa": "contacto_inicial",
+    "etapa": "propuesta",
     "origen": "Sitio web",
     "valor": 15000,
     "asignadoA": "Carlos Ruiz",
     "notas": "Pidio cotizacion, marcar el martes.",
     "creadoEl": "2026-06-10T09:15:00.000Z",
-    "ultimoContacto": "2026-06-18T12:00:00.000Z"
+    "ultimoContacto": "2026-06-18T12:00:00.000Z",
+    "presupuestoAceptado": false,
+    "rfc": "",
+    "regimenFiscal": "",
+    "direccionFiscal": "",
+    "cp": ""
   },
   {
     "id": 3,

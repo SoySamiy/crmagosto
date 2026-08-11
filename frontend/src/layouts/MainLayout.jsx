@@ -17,7 +17,25 @@ const NAV_ITEMS = [
     ],
   },
   { to: "/leads", label: "Leads", icon: "person_add" },
-  { to: "/contactos", label: "Contactos", icon: "contacts" },
+  {
+    to: "/contactos",
+    label: "Contactos",
+    icon: "contacts",
+    children: [
+      { to: "/contactos/fisicas", label: "Personas fisicas" },
+      { to: "/contactos/morales", label: "Personas morales" },
+    ],
+  },
+  { to: "/companias", label: "Compañías", icon: "business" },
+  { to: "/negociaciones", label: "Negociaciones", icon: "handshake" },
+  { to: "/analitica", label: "Analiticas", icon: "analytics" },
+  { to: "/productos", label: "Productos", icon: "inventory_2" },
+  { to: "/pedidos", label: "Pedidos", icon: "receipt" },
+  { to: "/usuarios", label: "Usuarios", icon: "people" },
+  { to: "/tareas", label: "Tareas", icon: "task" },
+  { to: "/cotizaciones", label: "Cotizaciones", icon: "description" },
+  { to: "/reportes", label: "Reportes", icon: "bar_chart" },
+  { to: "/ayuda", label: "Ayuda", icon: "help_center" },
 ];
 
 function UserMenu() {
@@ -32,6 +50,7 @@ function UserMenu() {
         setOpen(false);
       }
     }
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);

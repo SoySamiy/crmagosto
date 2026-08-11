@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "nombre": "Automatización de cotizaciones",
+    "tipoPersona": "moral",
+    "clienteNombre": "Gómez Industrial S.A. de C.V.",
+    "valor": 185000,
+    "etapa": "negociacion",
+    "probabilidad": 80,
+    "vendedor": "Laura Gomez",
+    "fechaCierre": "2026-07-12T12:00:00.000Z",
+    "notas": "Pendiente firma de anexo de servicio.",
+    "creadoEl": "2026-06-10T08:20:00.000Z"
+  },
+  {
+    "id": 2,
+    "nombre": "Contrato de soporte extendido",
+    "tipoPersona": "moral",
+    "clienteNombre": "TechNexus México",
+    "valor": 96000,
+    "etapa": "propuesta",
+    "probabilidad": 65,
+    "vendedor": "Carlos Ruiz",
+    "fechaCierre": "2026-07-05T09:00:00.000Z",
+    "notas": "Revisar alcance de soporte para 24/7.",
+    "creadoEl": "2026-06-18T10:15:00.000Z"
+  },
+  {
+    "id": 3,
+    "nombre": "Implementación inicial CRM",
+    "tipoPersona": "fisica",
+    "clienteNombre": "Juan Perez",
+    "valor": 32000,
+    "etapa": "seguimiento",
+    "probabilidad": 50,
+    "vendedor": "Laura Gomez",
+    "fechaCierre": "2026-07-20T14:00:00.000Z",
+    "notas": "Coordinacion de demo con el equipo el viernes.",
+    "creadoEl": "2026-06-22T15:55:00.000Z"
+  },
+  {
+    "id": 4,
+    "nombre": "Renovación de licencia anual",
+    "tipoPersona": "moral",
+    "clienteNombre": "Consultoría Verde S.A. de C.V.",
+    "valor": 185000,
+    "etapa": "fidelizado",
+    "probabilidad": 95,
+    "vendedor": "Laura Gomez",
+    "fechaCierre": "2026-06-30T11:30:00.000Z",
+    "notas": "Contrato vigente, se espera renovación sin cambios.",
+    "creadoEl": "2026-05-03T09:20:00.000Z"
+  }
+]

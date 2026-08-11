@@ -3,15 +3,19 @@
   "version": "1.0.0",
   "description": "CRM 2.0 - frontend (React + Vite) y backend (Express)",
   "private": true,
+  "homepage": "https://ivcc8.github.io/crmagosto/",
   "scripts": {
     "install:all": "npm install --prefix frontend && npm install --prefix backend",
     "dev:frontend": "npm run dev --prefix frontend",
     "dev:backend": "npm run dev --prefix backend",
     "dev": "concurrently -n FRONTEND,BACKEND -c blue,green \"npm:dev:frontend\" \"npm:dev:backend\"",
-    "build:frontend": "npm run build --prefix frontend"
+    "build:frontend": "npm run build --prefix frontend",
+    "predeploy": "npm run build --prefix frontend",
+    "deploy": "gh-pages -d frontend/dist"
   },
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^10.0.3"
+    "concurrently": "^10.0.3",
+    "gh-pages": "^6.3.0"
   }
 }

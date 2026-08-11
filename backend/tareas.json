@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "titulo": "Seguimiento con cliente VIP",
+    "descripcion": "Llamar a la empresa para revisar propuesta y cierre.",
+    "asignadoA": "Laura Gomez",
+    "estado": "en progreso",
+    "prioridad": "alta",
+    "fechaVencimiento": "2026-08-10",
+    "creadoEl": "2026-08-01T09:00:00.000Z",
+    "notas": "Asegurarse de enviar material adicional antes de la llamada."
+  },
+  {
+    "id": 2,
+    "titulo": "Actualizar catálogo de productos",
+    "descripcion": "Incorporar nuevos servicios de software al catálogo.",
+    "asignadoA": "Carlos Ruiz",
+    "estado": "completada",
+    "prioridad": "media",
+    "fechaVencimiento": "2026-08-14",
+    "creadoEl": "2026-07-30T12:15:00.000Z",
+    "notas": "Coordinar con diseño para los precios actualizados."
+  }
+]
