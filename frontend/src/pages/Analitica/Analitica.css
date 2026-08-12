@@ -1,345 +1,406 @@
-.analitica-page {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  padding: 24px 24px 0;
+/* --- VARIABLES Y CONFIGURACIÓN BASE DE ANALÍTICAS --- */
+:root {
+  --bg-dark: #0b0f19;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+
+  --glass-bg: rgba(15, 23, 42, 0.65);
+  --glass-bg-hover: rgba(30, 41, 59, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-bright: rgba(255, 255, 255, 0.15);
+
+  --accent-blue: #38bdf8;
+  --accent-blue-glow: rgba(56, 189, 248, 0.25);
+  --accent-emerald: #34d399;
+  --accent-amber: #fbbf24;
+  --accent-purple: #c084fc;
 }
 
+/* --- CONTENEDOR GENERAL --- */
+.analitica-page {
+  background: radial-gradient(circle at 20% 10%, rgba(56, 189, 248, 0.12), transparent 40%),
+              radial-gradient(circle at 80% 90%, rgba(192, 132, 252, 0.1), transparent 45%),
+              var(--bg-dark);
+  min-height: 100vh;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--text-main);
+}
+
+/* --- HERO & BARRA DE CONTROLES --- */
 .analitica-hero {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
+  gap: 1.5rem;
   flex-wrap: wrap;
-  gap: 20px;
-  padding: 28px 32px;
-  border-radius: 28px;
-  background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  backdrop-filter: blur(18px);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
 }
 
 .analitica-hero h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
   margin: 0;
-  font-size: 2rem;
-  color: #f8fafc;
+  letter-spacing: -0.02em;
 }
 
 .analitica-hero p {
-  margin: 10px 0 0;
-  color: #cbd5e1;
-  max-width: 520px;
+  color: var(--text-muted);
+  margin-top: 0.4rem;
+  font-size: 0.95rem;
 }
 
 .analitica-controls {
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
   align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .analitica-controls label {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  align-items: center;
+  gap: 0.6rem;
   font-size: 0.85rem;
-  color: #cbd5e1;
+  color: var(--text-muted);
+  font-weight: 500;
 }
 
-.analitica-controls input {
-  min-width: 170px;
-  padding: 12px 14px;
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(255, 255, 255, 0.06);
-  color: #f8fafc;
+.analitica-controls input[type="date"] {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+  padding: 0.55rem 0.85rem;
+  border-radius: 10px;
+  outline: none;
+  font-size: 0.85rem;
+  color-scheme: dark;
 }
 
-.analitica-controls button {
-  min-width: 160px;
+/* --- REUTILIZABLE CRISTAL --- */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 12px 32px 0 rgba(0, 0, 0, 0.35);
+  transition: border-color 0.25s ease, background 0.25s ease;
 }
 
-.analitica-controls input::placeholder {
-  color: rgba(255, 255, 255, 0.55);
+.glass:hover {
+  border-color: var(--glass-border-bright);
 }
 
+/* --- GRID DE KPIS --- */
 .kpi-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 18px;
-  align-items: stretch;
+  gap: 1.25rem;
 }
 
+.kpi-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 18px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.35rem;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.kpi-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--glass-border-bright);
+}
+
+.kpi-card.big {
+  grid-column: span 1;
+  background: rgba(30, 41, 59, 0.4);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.kpi-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.kpi-value {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.1;
+}
+
+.kpi-value.green { color: var(--accent-emerald); }
+.kpi-value.blue { color: var(--accent-blue); }
+.kpi-value.orange { color: var(--accent-amber); }
+
+.kpi-card small {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+/* Ajustes dentro de KPI */
 .kpi-card.settings {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 18px;
-  min-height: 220px;
-  align-items: stretch;
-  background: rgba(15, 23, 42, 0.78);
+  grid-column: span 2;
+  gap: 0.8rem;
 }
 
 .settings-row {
   display: grid;
-  grid-template-columns: repeat(2, minmax(120px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
 }
 
 .settings-row label {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  font-size: 0.85rem;
-  color: #cbd5e1;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
 }
 
 .settings-row input {
-  padding: 12px 14px;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.16);
-  background: rgba(255,255,255,0.06);
-  color: #f8fafc;
+  background: rgba(2, 6, 23, 0.5);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  padding: 0.5rem 0.75rem;
+  color: var(--text-main);
+  outline: none;
 }
 
 .settings-actions {
   display: flex;
-  gap: 12px;
   justify-content: flex-end;
-  flex-wrap: wrap;
+  gap: 0.6rem;
 }
 
-.kpi-card {
-  border-radius: 24px;
-  padding: 24px;
-  background: rgba(15, 23, 42, 0.78);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(16px);
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.18);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  min-height: 160px;
+/* --- BOTONES --- */
+.btn-primary {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.65rem 1.25rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  box-shadow: 0 4px 14px var(--accent-blue-glow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.kpi-card.big {
-  min-height: 180px;
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(56, 189, 248, 0.35);
 }
 
-.kpi-label {
-  color: #94a3b8;
-  font-size: 0.82rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+  padding: 0.65rem 1.25rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.kpi-card small {
-  color: #cbd5e1;
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--glass-border-bright);
 }
 
-.kpi-value {
-  font-size: 2rem;
-  font-weight: 800;
-  color: #f8fafc;
+.formulas-btn {
+  align-self: flex-start;
+  margin-top: -0.5rem;
 }
 
-.kpi-value.green {
-  color: #34d399;
-}
-
-.kpi-value.blue {
-  color: #38bdf8;
-}
-
-.kpi-value.orange {
-  color: #fb923c;
-}
-
+/* --- SECCIÓN DETALLE FINANCIERO Y TENDENCIA --- */
 .analitica-detail {
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 18px;
+  grid-template-columns: 1fr 2fr;
+  gap: 1.5rem;
 }
 
-.explain,
-.trend {
-  border-radius: 24px;
-  padding: 24px;
-  background: rgba(15, 23, 42, 0.78);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(16px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.16);
-}
-
-.explain h3,
-.trend h3 {
-  margin: 0 0 14px;
-  color: #f8fafc;
+.analitica-detail h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  font-weight: 700;
 }
 
 .explain p {
-  margin: 0;
-  color: #cbd5e1;
-  line-height: 1.8;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-size: 0.92rem;
 }
 
+/* --- GRID DE GRÁFICAS Y ANALÍTICAS (2x2) --- */
 .analytics-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-  align-items: stretch;
-}
-
-.chart-card {
-  border-radius: 24px;
-  padding: 24px;
-  background: rgba(15, 23, 42, 0.78);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(16px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.16);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
 }
 
 .chart-card h3 {
-  margin: 0 0 16px;
-  font-size: 1rem;
-  color: #f8fafc;
+  margin: 0 0 1.25rem 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
 }
 
-.chart-card .recharts-wrapper {
-  min-height: 240px;
-}
-
-.chart-card svg {
-  overflow: visible;
-}
-
+/* BARRA DE METAS TRIMESTRALES */
 .goal-item {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 12px;
-  align-items: center;
-  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
 }
 
 .goal-item span {
-  color: #cbd5e1;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
 }
 
 .goal-track {
   width: 100%;
-  height: 14px;
-  background: rgba(255, 255, 255, 0.08);
+  height: 10px;
+  background: rgba(255, 255, 255, 0.06);
   border-radius: 999px;
   overflow: hidden;
 }
 
 .goal-fill {
   height: 100%;
-  background: #38bdf8;
+  background: var(--accent-emerald);
   border-radius: 999px;
-  transition: width 0.4s ease;
+  transition: width 0.5s ease;
 }
 
-.goal-fill.blue {
-  background: #7c3aed;
-}
-
-.goal-fill.green {
-  background: #34d399;
-}
+.goal-fill.blue { background: var(--accent-blue); }
+.goal-fill.green { background: #10b981; }
 
 .goal-value {
-  min-width: 52px;
+  font-size: 0.85rem;
   text-align: right;
-  font-weight: 700;
-  color: #f8fafc;
+  color: var(--text-main);
 }
 
-.formulas-btn {
-  margin: 16px 0;
+/* --- ESTILOS COMPATIBLES CON RECHARTS EN TEMA OSCURO --- */
+.recharts-text {
+  fill: var(--text-muted) !important;
+  font-size: 12px;
 }
 
+.recharts-cartesian-grid-line {
+  stroke: rgba(255, 255, 255, 0.05) !important;
+}
+
+.recharts-default-tooltip {
+  background-color: rgba(15, 23, 42, 0.95) !important;
+  border: 1px solid var(--glass-border-bright) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5) !important;
+  color: var(--text-main) !important;
+}
+
+.recharts-legend-item-text {
+  color: var(--text-muted) !important;
+}
+
+/* --- MODAL DE FÓRMULAS --- */
 .modal-overlay {
   position: fixed;
   inset: 0;
+  background: rgba(3, 7, 18, 0.75);
+  backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.65);
-  z-index: 1100;
+  padding: 1.5rem;
+  z-index: 1000;
 }
 
 .modal-card {
-  background: rgba(15, 23, 42, 0.96);
-  padding: 28px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid var(--glass-border-bright);
   border-radius: 24px;
-  width: 700px;
-  max-width: 94%;
-  color: #e6f0fb;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+  width: min(100%, 650px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
 }
 
 .modal-card-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--glass-border);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
 }
 
-.modal-body {
-  margin-top: 20px;
-}
-
-.modal-body h4 {
-  margin: 16px 0 10px;
-}
-
-.modal-body p,
-.modal-body li {
-  color: #c9dcec;
-  line-height: 1.8;
+.modal-card-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
 }
 
 .close-btn {
-  border: none;
   background: transparent;
-  color: #cbd5e1;
-  font-size: 1.35rem;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.2rem;
   cursor: pointer;
 }
 
-@media (max-width: 980px) {
-  .analitica-detail,
-  .analytics-grid {
-    grid-template-columns: 1fr;
-  }
+.modal-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 
-  .analitica-hero {
-    padding: 20px;
-  }
+.modal-body h4 {
+  margin: 0;
+  color: var(--accent-blue);
+  font-size: 1rem;
+}
 
-  .settings-row {
-    grid-template-columns: 1fr;
-  }
+.modal-body p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.modal-body ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+/* --- RESPONSIVIDAD --- */
+@media (max-width: 1024px) {
+  .analitica-detail { grid-template-columns: 1fr; }
+  .analytics-grid { grid-template-columns: 1fr; }
+  .kpi-card.settings { grid-column: span 1; }
 }
 
 @media (max-width: 640px) {
-  .analitica-hero {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .analitica-controls {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .kpi-grid,
-  .analytics-grid {
-    gap: 16px;
-  }
+  .analitica-hero { flex-direction: column; align-items: stretch; }
+  .settings-row { grid-template-columns: 1fr; }
 }

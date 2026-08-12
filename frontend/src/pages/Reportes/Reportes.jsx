@@ -22,7 +22,7 @@ import { getPedidos } from "../../services/pedidosService";
 import { getNegociaciones } from "../../services/negociacionesService";
 import { getTareas } from "../../services/tareasService";
 import { getCotizaciones } from "../../services/cotizacionesService";
-import "../../styles/SectionPage.css";
+import "./Reportes.css";
 
 const REPORT_TYPES = [
   { value: "todos", label: "Resumen general" },
@@ -156,19 +156,6 @@ export default function Reportes() {
     setStartDate("");
     setEndDate("");
     setDateError("");
-  }
-
-  function handleExportCsv() {
-    const csvContent = buildCsvContent();
-    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `reporte-${reportType}-${new Date().toISOString().slice(0, 10)}.csv`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
   }
 
   const filteredPedidos = useMemo(
@@ -477,7 +464,7 @@ export default function Reportes() {
             ? "Visión general de métricas y estados operativos."
             : `Mostrando ${tableRows.length} registros filtrados por rango de fechas.`}
         </span>
-        <button className="table-action" type="button" onClick={handleExportCsv}>
+        <button className="table-action" type="button" onClick={handleExportCsv} disabled={Boolean(dateError)}>
           Exportar CSV
         </button>
       </div>
@@ -503,7 +490,7 @@ export default function Reportes() {
                     <td>{group.type}</td>
                     <td>{label}</td>
                     <td>
-                      {group.data.filter((item) => item.estado === label.toLowerCase().replace(" ", " ")).length}
+                      {group.data.filter((item) => (item.estado || "").toLowerCase() === label.toLowerCase()).length}
                     </td>
                   </tr>
                 ))

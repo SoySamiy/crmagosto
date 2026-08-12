@@ -1,0 +1,327 @@
+/* --- VARIABLES Y CONFIGURACIÓN GENERAL --- */
+:root {
+  --bg-dark: #040816;
+  --text-main: #f8fafc;
+  --text-muted: #9fb2cd;
+  --text-dim: #64748b;
+
+  --accent-blue: #38bdf8;
+  --accent-blue-glow: rgba(56, 189, 248, 0.25);
+  --accent-emerald: #10b981;
+  --accent-rose: #f87171;
+}
+
+/* --- CONTENEDOR PRINCIPAL --- */
+.section-page {
+  background: 
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.22), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(129, 140, 248, 0.25), transparent 30%),
+    linear-gradient(135deg, #040816 0%, #0b1224 45%, #111c35 100%);
+  min-height: 100vh;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 28px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-main);
+}
+
+/* --- ENCABEZADO --- */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.section-header h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-main);
+  text-shadow: 0 0 24px rgba(56, 189, 248, 0.25);
+}
+
+.section-header p {
+  margin: 6px 0 0;
+  color: var(--text-muted);
+  font-size: 0.98rem;
+}
+
+/* --- TOOLBAR / FILTROS DE REPORTES --- */
+.section-toolbar {
+  border-radius: 18px;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-end;
+}
+
+.field-group.compact {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #dbeafe;
+  font-size: 0.88rem;
+  font-weight: 600;
+  flex: 1 1 180px;
+}
+
+.field-group.compact input,
+.field-group.compact select {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  outline: none;
+  font-size: 0.9rem;
+  color-scheme: dark;
+}
+
+.field-group.compact input:focus,
+.field-group.compact select:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px var(--accent-blue-glow);
+}
+
+.toolbar-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.table-action {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-main);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.table-action:hover:not(:disabled) {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: rgba(56, 189, 248, 0.4);
+  color: #7dd3fc;
+}
+
+.table-action:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* --- TARJETAS DE RESUMEN METRICAS (EFECTO GLASS 3D) --- */
+.section-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+.summary-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 15px 35px rgba(2, 6, 23, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transform-style: preserve-3d;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.summary-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.14), transparent 45%, rgba(56,189,248,0.1));
+  pointer-events: none;
+}
+
+.summary-card:hover {
+  transform: translateY(-4px) rotateX(2deg) rotateY(-2deg);
+  box-shadow: 0 25px 45px rgba(2, 6, 23, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  border-color: rgba(125, 211, 252, 0.4);
+}
+
+.summary-card span {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+
+.summary-card strong {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-main);
+  position: relative;
+  z-index: 1;
+}
+
+/* --- GRID DE GRÁFICOS (Efecto Glass 3D Panel) --- */
+.section-chart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 22px;
+}
+
+.chart-panel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 20px 45px rgba(2, 6, 23, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chart-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent 40%, rgba(56,189,248,0.08));
+  pointer-events: none;
+}
+
+.chart-panel h2 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-main);
+  position: relative;
+  z-index: 1;
+}
+
+.chart-panel p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Tooltip personalizado de Recharts dentro del cristal */
+.recharts-default-tooltip {
+  background-color: rgba(15, 23, 42, 0.9) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: blur(10px) !important;
+  color: #f8fafc !important;
+}
+
+/* --- ACCIONES Y MENSAJES DE TABLA --- */
+.table-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.table-actions span {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+/* --- TABLA GLASSMORPHISM --- */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 15px 35px rgba(2, 6, 23, 0.35);
+}
+
+.section-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.section-table th {
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #7dd3fc;
+  font-weight: 700;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  white-space: nowrap;
+}
+
+.section-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
+  white-space: nowrap;
+}
+
+.section-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.section-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.section-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* --- ESTADOS Y ERRORES --- */
+.error {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(248, 113, 113, 0.25);
+  background: rgba(248, 113, 113, 0.16);
+  color: #fecaca;
+  backdrop-filter: blur(10px);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 640px) {
+  .section-page {
+    padding: 16px;
+  }
+
+  .section-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .section-chart-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .table-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

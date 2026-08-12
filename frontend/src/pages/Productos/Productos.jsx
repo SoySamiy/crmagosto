@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { crearProducto, actualizarProducto, eliminarProducto, getProductos } from "../../services/productosService";
-import "../../styles/SectionPage.css";
+import "./Productos.css";
 
 const EMPTY_FORM = {
   nombre: "",
@@ -115,24 +115,63 @@ export default function Productos() {
 
   return (
     <div className="section-page">
+      {/* HEADER SUPERIOR */}
       <div className="section-header">
         <div>
-          <h1>Productos</h1>
-          <p>Controla el catálogo, precios y disponibilidad de tus productos y servicios.</p>
+          <h1>Catálogo de Productos</h1>
+          <p className="subtitle">Controla inventario, categorías y disponibilidad en tiempo real.</p>
         </div>
-        <button type="button" className="btn-primary" onClick={openCreateModal}>
+        <button type="button" className="btn-primary-glow" onClick={openCreateModal}>
           <span className="material-symbols-outlined">inventory_2</span>
           Nuevo producto
         </button>
       </div>
 
-      <div className="section-toolbar">
-        <input
-          type="search"
-          placeholder="Buscar producto, categoría o descripción..."
-          value={search}
-          onChange={(event) => setSearch(event.target.value)}
-        />
+      {/* TARJETAS DE RESUMEN (DESAMONTONADAS) */}
+      <div className="section-summary">
+        <div className="glass-card summary-card">
+          <div className="summary-icon icon-cyan">
+            <span className="material-symbols-outlined">widgets</span>
+          </div>
+          <div className="summary-info">
+            <span>Productos Registrados</span>
+            <strong>{inventorySummary.total}</strong>
+          </div>
+        </div>
+
+        <div className="glass-card summary-card">
+          <div className="summary-icon icon-emerald">
+            <span className="material-symbols-outlined">check_circle</span>
+          </div>
+          <div className="summary-info">
+            <span>Disponibles</span>
+            <strong>{inventorySummary.disponibles}</strong>
+          </div>
+        </div>
+
+        <div className="glass-card summary-card">
+          <div className="summary-icon icon-rose">
+            <span className="material-symbols-outlined">do_not_disturb_on</span>
+          </div>
+          <div className="summary-info">
+            <span>Agotados</span>
+            <strong>{inventorySummary.agotados}</strong>
+          </div>
+        </div>
+      </div>
+
+      {/* BARRA DE HERRAMIENTAS Y BÚSQUEDA */}
+      <div className="glass-card section-toolbar">
+        <div className="search-input-wrapper">
+          <span className="material-symbols-outlined search-icon">search</span>
+          <input
+            type="search"
+            className="glass-input"
+            placeholder="Buscar producto, categoría o descripción..."
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+          />
+        </div>
         <div className="filter-group">
           {[
             { value: "todos", label: "Todos" },
@@ -142,7 +181,7 @@ export default function Productos() {
             <button
               key={item.value}
               type="button"
-              className={`section-pill ${estadoFiltro === item.value ? "active" : ""}`}
+              className={`glass-pill ${estadoFiltro === item.value ? "active" : ""}`}
               onClick={() => setEstadoFiltro(item.value)}
             >
               {item.label}
@@ -151,28 +190,14 @@ export default function Productos() {
         </div>
       </div>
 
-      {error && <p className="error">Error cargando productos: {error}</p>}
+      {error && <div className="error-banner">Error cargando productos: {error}</div>}
 
-      <div className="section-summary">
-        <div className="summary-card">
-          <span>Productos registrados</span>
-          <strong>{inventorySummary.total}</strong>
-        </div>
-        <div className="summary-card">
-          <span>Disponibles</span>
-          <strong>{inventorySummary.disponibles}</strong>
-        </div>
-        <div className="summary-card">
-          <span>Agotados</span>
-          <strong>{inventorySummary.agotados}</strong>
-        </div>
+      <div className="results-counter">
+        Mostrando <strong>{productosFiltrados.length}</strong> resultados
       </div>
 
-      <div className="table-actions">
-        <span>{productosFiltrados.length} resultados</span>
-      </div>
-
-      <div className="table-container">
+      {/* TABLA PRINCIPAL DE PRODUCTOS */}
+      <div className="glass-card main-table-container">
         <table className="section-table">
           <thead>
             <tr>
@@ -184,27 +209,39 @@ export default function Productos() {
               <th>Unidad</th>
               <th>Estado</th>
               <th>Descripción</th>
-              <th>Acciones</th>
+              <th style={{ textAlign: "right" }}>Acciones</th>
             </tr>
           </thead>
           <tbody>
             {productosFiltrados.map((item) => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.nombre}</td>
-                <td>{item.categoria || "-"}</td>
-                <td>{formatCurrency(item.precio)}</td>
-                <td>{item.inventario ?? "-"}</td>
-                <td>{item.unidad || "-"}</td>
-                <td>{(item.estado || "disponible").toUpperCase()}</td>
-                <td>{item.descripcion || "-"}</td>
+              <tr key={item.id} className="glass-row">
+                <td className="cell-id">#{item.id}</td>
+                <td className="cell-title">{item.nombre}</td>
                 <td>
-                  <button type="button" className="table-action" onClick={() => openEditModal(item)}>
-                    Editar
-                  </button>
-                  <button type="button" className="table-action danger" onClick={() => handleDelete(item)}>
-                    Eliminar
-                  </button>
+                  <span className="badge-category">{item.categoria || "-"}</span>
+                </td>
+                <td className="cell-value">{formatCurrency(item.precio)}</td>
+                <td>
+                  <strong>{item.inventario ?? "-"}</strong>
+                </td>
+                <td className="cell-unit">{item.unidad || "-"}</td>
+                <td>
+                  <span className={`badge-status ${item.estado === "agotado" ? "status-rose" : "status-emerald"}`}>
+                    {(item.estado || "disponible").toUpperCase()}
+                  </span>
+                </td>
+                <td className="cell-desc" title={item.descripcion}>
+                  {item.descripcion || "-"}
+                </td>
+                <td>
+                  <div className="action-buttons-wrapper">
+                    <button type="button" className="btn-glass-action" onClick={() => openEditModal(item)}>
+                      Editar
+                    </button>
+                    <button type="button" className="btn-glass-action btn-danger" onClick={() => handleDelete(item)}>
+                      Eliminar
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
@@ -212,9 +249,10 @@ export default function Productos() {
         </table>
       </div>
 
+      {/* MODAL EDITAR / AGREGAR */}
       {modalOpen && (
         <div className="modal-overlay" onClick={() => setModalOpen(false)}>
-          <div className="modal-card" onClick={(event) => event.stopPropagation()}>
+          <div className="glass-modal modal-card" onClick={(event) => event.stopPropagation()}>
             <div className="modal-card-header">
               <div>
                 <h2>{editingProducto ? "Editar producto" : "Agregar producto"}</h2>
@@ -226,43 +264,43 @@ export default function Productos() {
             </div>
             <form className="modal-grid" onSubmit={handleSubmit}>
               <label className="field-group">
-                Nombre
+                <span>Nombre</span>
                 <input value={form.nombre} onChange={(event) => updateField("nombre", event.target.value)} required />
               </label>
               <label className="field-group">
-                Categoría
+                <span>Categoría</span>
                 <input value={form.categoria} onChange={(event) => updateField("categoria", event.target.value)} />
               </label>
               <label className="field-group">
-                Precio
+                <span>Precio</span>
                 <input type="number" value={form.precio} onChange={(event) => updateField("precio", event.target.value)} />
               </label>
               <label className="field-group">
-                Inventario
+                <span>Inventario</span>
                 <input type="number" value={form.inventario} onChange={(event) => updateField("inventario", event.target.value)} />
               </label>
               <label className="field-group">
-                Unidad
+                <span>Unidad</span>
                 <input value={form.unidad} onChange={(event) => updateField("unidad", event.target.value)} />
               </label>
               <label className="field-group">
-                Estado
+                <span>Estado</span>
                 <select value={form.estado} onChange={(event) => updateField("estado", event.target.value)}>
                   <option value="disponible">Disponible</option>
                   <option value="agotado">Agotado</option>
                 </select>
               </label>
-              <label className="field-group" style={{ gridColumn: "1 / -1" }}>
-                Descripción
-                <textarea rows={4} value={form.descripcion} onChange={(event) => updateField("descripcion", event.target.value)} />
+              <label className="field-group full-width">
+                <span>Descripción</span>
+                <textarea rows={3} value={form.descripcion} onChange={(event) => updateField("descripcion", event.target.value)} />
               </label>
             </form>
             <div className="modal-actions">
               <button type="button" className="btn-secondary" onClick={() => setModalOpen(false)}>
                 Cancelar
               </button>
-              <button type="button" className="btn-primary" onClick={handleSubmit} disabled={saving}>
-                {saving ? "Guardando..." : editingProducto ? "Guardar" : "Crear"}
+              <button type="button" className="btn-primary-glow" onClick={handleSubmit} disabled={saving}>
+                {saving ? "Guardando..." : editingProducto ? "Guardar Cambios" : "Crear Producto"}
               </button>
             </div>
           </div>

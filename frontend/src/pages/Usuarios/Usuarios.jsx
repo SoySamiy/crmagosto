@@ -5,7 +5,7 @@ import {
   eliminarUsuario,
   getUsuarios,
 } from "../../services/usuariosService";
-import "../../styles/SectionPage.css";
+import "./Usuarios.css";
 
 const EMPTY_FORM = {
   nombre: "",
@@ -17,8 +17,18 @@ const EMPTY_FORM = {
 };
 
 function formatFecha(iso) {
-  if (!iso) return "-";
+  if (!iso) return "Sin conexión";
   return new Date(iso).toLocaleDateString("es-MX", { day: "2-digit", month: "short", year: "numeric" });
+}
+
+function getInitials(name) {
+  if (!name) return "U";
+  return name
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .substring(0, 2)
+    .toUpperCase();
 }
 
 export default function Usuarios() {
@@ -123,24 +133,63 @@ export default function Usuarios() {
 
   return (
     <div className="section-page">
+      {/* HEADER SUPERIOR */}
       <div className="section-header">
         <div>
-          <h1>Usuarios</h1>
-          <p>Administra usuarios y roles de acceso para tu equipo comercial.</p>
+          <h1>Directorio de Usuarios</h1>
+          <p className="subtitle">Gestiona accesos, credenciales y roles del personal del equipo.</p>
         </div>
-        <button type="button" className="btn-primary" onClick={openCreateModal}>
-          <span className="material-symbols-outlined">people</span>
-          Nuevo usuario
+        <button type="button" className="btn-primary-glow" onClick={openCreateModal}>
+          <span className="material-symbols-outlined">person_add</span>
+          Nuevo Usuario
         </button>
       </div>
 
-      <div className="section-toolbar">
-        <input
-          type="search"
-          placeholder="Buscar por nombre, email o cargo..."
-          value={search}
-          onChange={(event) => setSearch(event.target.value)}
-        />
+      {/* METRICAS EN UNA SOLA FILA */}
+      <div className="section-summary">
+        <div className="glass-card summary-card">
+          <div className="summary-icon icon-cyan">
+            <span className="material-symbols-outlined">group</span>
+          </div>
+          <div className="summary-info">
+            <span>Total Usuarios</span>
+            <strong>{summary.total}</strong>
+          </div>
+        </div>
+
+        <div className="glass-card summary-card">
+          <div className="summary-icon icon-emerald">
+            <span className="material-symbols-outlined">verified_user</span>
+          </div>
+          <div className="summary-info">
+            <span>Usuarios Activos</span>
+            <strong>{summary.activos}</strong>
+          </div>
+        </div>
+
+        <div className="glass-card summary-card">
+          <div className="summary-icon icon-rose">
+            <span className="material-symbols-outlined">block</span>
+          </div>
+          <div className="summary-info">
+            <span>Inactivos / Suspendidos</span>
+            <strong>{summary.inactivos}</strong>
+          </div>
+        </div>
+      </div>
+
+      {/* FILTROS Y BÚSQUEDA */}
+      <div className="glass-card section-toolbar">
+        <div className="search-input-wrapper">
+          <span className="material-symbols-outlined search-icon">search</span>
+          <input
+            type="search"
+            className="glass-input"
+            placeholder="Buscar por nombre, email o cargo..."
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+          />
+        </div>
         <div className="filter-group">
           {[
             { value: "todos", label: "Todos los estados" },
@@ -150,7 +199,7 @@ export default function Usuarios() {
             <button
               key={item.value}
               type="button"
-              className={`section-pill ${estadoFiltro === item.value ? "active" : ""}`}
+              className={`glass-pill ${estadoFiltro === item.value ? "active" : ""}`}
               onClick={() => setEstadoFiltro(item.value)}
             >
               {item.label}
@@ -159,68 +208,66 @@ export default function Usuarios() {
         </div>
       </div>
 
-      {error && <p className="error">Error cargando usuarios: {error}</p>}
+      {error && <div className="error-banner">Error cargando usuarios: {error}</div>}
 
-      <div className="section-summary">
-        <div className="summary-card">
-          <span>Usuarios</span>
-          <strong>{summary.total}</strong>
-        </div>
-        <div className="summary-card">
-          <span>Activos</span>
-          <strong>{summary.activos}</strong>
-        </div>
-        <div className="summary-card">
-          <span>Inactivos</span>
-          <strong>{summary.inactivos}</strong>
-        </div>
+      <div className="results-counter">
+        Mostrando <strong>{usuariosFiltrados.length}</strong> colaboradores
       </div>
 
-      <div className="table-actions">
-        <span>{usuariosFiltrados.length} resultados</span>
+      {/* GRID DE TARJETAS DE USUARIO (DIFERENTE A TABLA) */}
+      <div className="users-grid">
+        {usuariosFiltrados.map((item) => (
+          <div key={item.id} className="glass-card user-card">
+            <div className="user-card-header">
+              <div className="avatar-wrapper">
+                <div className="user-avatar">{getInitials(item.nombre)}</div>
+                <span className={`status-dot ${item.estado === "activo" ? "active" : "inactive"}`} />
+              </div>
+              <div className="user-card-title">
+                <h3>{item.nombre}</h3>
+                <span className="user-role-badge">{item.cargo || "Sin cargo registrado"}</span>
+              </div>
+            </div>
+
+            <div className="user-card-body">
+              <div className="user-info-row">
+                <span className="material-symbols-outlined">mail</span>
+                <span className="info-text">{item.email}</span>
+              </div>
+              <div className="user-info-row">
+                <span className="material-symbols-outlined">badge</span>
+                <div className="roles-tags">
+                  {item.roles?.length ? (
+                    item.roles.map((rol, idx) => (
+                      <span key={idx} className="role-chip">{rol}</span>
+                    ))
+                  ) : (
+                    <span className="role-chip">Sin rol</span>
+                  )}
+                </div>
+              </div>
+              <div className="user-info-row">
+                <span className="material-symbols-outlined">schedule</span>
+                <span className="info-text muted">Conexión: {formatFecha(item.ultimaConexion)}</span>
+              </div>
+            </div>
+
+            <div className="user-card-footer">
+              <button type="button" className="btn-card-action" onClick={() => openEditModal(item)}>
+                Editar
+              </button>
+              <button type="button" className="btn-card-action btn-danger" onClick={() => handleDelete(item)}>
+                Eliminar
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
 
-      <div className="table-container">
-        <table className="section-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nombre</th>
-              <th>Email</th>
-              <th>Roles</th>
-              <th>Estado</th>
-              <th>Cargo</th>
-              <th>Ultima conexión</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {usuariosFiltrados.map((item) => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.nombre}</td>
-                <td>{item.email}</td>
-                <td>{item.roles?.join(", ") || "-"}</td>
-                <td>{item.estado || "-"}</td>
-                <td>{item.cargo || "-"}</td>
-                <td>{formatFecha(item.ultimaConexion)}</td>
-                <td>
-                  <button type="button" className="table-action" onClick={() => openEditModal(item)}>
-                    Editar
-                  </button>
-                  <button type="button" className="table-action danger" onClick={() => handleDelete(item)}>
-                    Eliminar
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
+      {/* MODAL */}
       {modalOpen && (
         <div className="modal-overlay" onClick={() => setModalOpen(false)}>
-          <div className="modal-card" onClick={(event) => event.stopPropagation()}>
+          <div className="glass-modal modal-card" onClick={(event) => event.stopPropagation()}>
             <div className="modal-card-header">
               <div>
                 <h2>{editingUsuario ? "Editar usuario" : "Nuevo usuario"}</h2>
@@ -232,15 +279,15 @@ export default function Usuarios() {
             </div>
             <form id="usuario-form" className="modal-grid" onSubmit={handleSubmit}>
               <label className="field-group">
-                Nombre
+                <span>Nombre</span>
                 <input value={form.nombre} onChange={(event) => updateField("nombre", event.target.value)} required />
               </label>
               <label className="field-group">
-                Email
+                <span>Email</span>
                 <input type="email" value={form.email} onChange={(event) => updateField("email", event.target.value)} required />
               </label>
               <label className="field-group">
-                Roles
+                <span>Roles (separados por coma)</span>
                 <input
                   value={form.roles}
                   onChange={(event) => updateField("roles", event.target.value)}
@@ -248,27 +295,27 @@ export default function Usuarios() {
                 />
               </label>
               <label className="field-group">
-                Estado
+                <span>Estado</span>
                 <select value={form.estado} onChange={(event) => updateField("estado", event.target.value)}>
                   <option value="activo">Activo</option>
                   <option value="inactivo">Inactivo</option>
                 </select>
               </label>
-              <label className="field-group">
-                Cargo
+              <label className="field-group full-width">
+                <span>Cargo</span>
                 <input value={form.cargo} onChange={(event) => updateField("cargo", event.target.value)} />
               </label>
-              <label className="field-group" style={{ gridColumn: "1 / -1" }}>
-                Notas
-                <textarea rows={4} value={form.notas} onChange={(event) => updateField("notas", event.target.value)} />
+              <label className="field-group full-width">
+                <span>Notas</span>
+                <textarea rows={3} value={form.notas} onChange={(event) => updateField("notas", event.target.value)} />
               </label>
             </form>
             <div className="modal-actions">
               <button type="button" className="btn-secondary" onClick={() => setModalOpen(false)}>
                 Cancelar
               </button>
-              <button form="usuario-form" type="submit" className="btn-primary" disabled={saving}>
-                {saving ? "Guardando..." : editingUsuario ? "Actualizar usuario" : "Crear usuario"}
+              <button form="usuario-form" type="submit" className="btn-primary-glow" disabled={saving}>
+                {saving ? "Guardando..." : editingUsuario ? "Actualizar Usuario" : "Crear Usuario"}
               </button>
             </div>
           </div>
